@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-ws
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: game-ws
+  template:
+    metadata:
+      labels:
+        app: game-ws
+    spec:
+      containers:
+      - name: game-ws
+        image: contardorm/desafio-ws:latest
+        ports:
+        - containerPort: 8080
