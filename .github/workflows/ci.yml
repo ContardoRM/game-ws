@@ -40,3 +40,13 @@ jobs:
             -e SONAR_LOGIN="${{ secrets.SONAR_TOKEN }}" \
             -v "$(pwd):/usr/src" \
             sonarsource/sonar-scanner-cli
+
+      - name: Set up kubectl
+        uses: azure/k8s-set-context@v1
+        with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+          version: '1.21.0'
+
+      - name: Run kubectl apply
+        run: |
+          kubectl get po
