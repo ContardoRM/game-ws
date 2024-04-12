@@ -15,5 +15,10 @@ spec:
       containers:
       - name: game-ws
         image: contardorm/desafio-ws:latest
+        resources:
+          limits:
+            cpu: 1
+            memory: 500Mi
         ports:
         - containerPort: 8080
+      automountServiceAccountToken: false
