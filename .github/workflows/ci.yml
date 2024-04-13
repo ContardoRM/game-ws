@@ -47,7 +47,23 @@ jobs:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
           version: '1.21.0'
 
-      - name: Run kubectl apply
+#      - name: Run kubectl apply
+#        run: |
+#          kubectl apply -f k8s/
+#          kubectl get po
+
+      - name: Install Helm
+            run: |
+              curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+      - name: Deploy with Helm
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         run: |
-          kubectl apply -f k8s/
+          kubectl version --client
+          helm version
+          helm repo add stable https://charts.helm.sh/stable
+          helm repo update
+          helm upgrade --install game-ws ./k8s/helm
           kubectl get po
+          helm ls

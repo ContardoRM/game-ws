@@ -1,0 +1,15 @@
+# values.yaml
+
+image:
+  repository: contardorm/desafio-ws
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: NodePort
+  port: 80
+
+replicaCount: 1
+
+flaskHost: 0.0.0.0
+flaskPort: 8080
