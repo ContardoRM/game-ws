@@ -18,6 +18,10 @@ spec:
         - name: flask
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            limits:
+              cpu: 1
+              memory: 500Mi
           ports:
             - containerPort: {{ .Values.service.port }}
           env:
@@ -25,3 +29,4 @@ spec:
               value: "{{ .Values.flaskHost }}"  # Utilizar la variable de entorno definida en values.yaml
             - name: FLASK_PORT
               value: "{{ .Values.flaskPort }}"  # Utilizar la variable de entorno definida en values.yaml
+        automountServiceAccountToken: false

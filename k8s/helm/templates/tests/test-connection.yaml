@@ -12,4 +12,5 @@ spec:
       image: busybox
       command: ['wget']
       args: ['{{ include "game-ws.fullname" . }}:{{ .Values.service.port }}']
+    automountServiceAccountToken: false
   restartPolicy: Never
