@@ -49,4 +49,5 @@ jobs:
 
       - name: Run kubectl apply
         run: |
+          kubectl apply -f k8s/
           kubectl get po
