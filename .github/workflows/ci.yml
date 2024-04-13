@@ -52,8 +52,11 @@ jobs:
 #          kubectl apply -f k8s/
 #          kubectl get po
 
+      - name: Download Helm script
+        run: curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+
       - name: Install Helm
-            run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+        run: bash get_helm.sh
 
       - name: Deploy with Helm
         env:
