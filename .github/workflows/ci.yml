@@ -53,8 +53,7 @@ jobs:
 #          kubectl get po
 
       - name: Install Helm
-            run: |
-              curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+            run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
       - name: Deploy with Helm
         env:
