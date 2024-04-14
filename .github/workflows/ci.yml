@@ -68,10 +68,13 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         run: |
+          chmod +x update_version.sh
+          NEW_VERSION=$(./update_version.sh)
           kubectl version --client
           helm version
           helm repo add stable https://charts.helm.sh/stable
           helm repo update
-          helm install game-ws ./k8s/helm
+          helm package ./k8s/helm
+          helm install game-ws ./k8s/helm/game-ws-$NEW_VERSION.tgz
           kubectl get po
           helm ls
