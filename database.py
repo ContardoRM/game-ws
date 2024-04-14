@@ -34,12 +34,11 @@ class Database:
             with connect(self.filename) as connection:
                 cursor = connection.cursor()
                 cursor.execute(query, values)
-                result = cursor.fetchall()
                 connection.commit()
         except Error as e:
             print(f'DATABASE ERROR: {e}')
             return None
-        return result
+        return cursor
 
     def printStatus(self):
         result_solo = self.executeQuery("SELECT * FROM solo;")
@@ -60,7 +59,7 @@ class Database:
         if result is None:
             print(f'DATABASE ERROR: could not query current high score of username {username}, mode {mode}')
             return None
-        return result[0][1] if result else None
+        return result.fetchone()[1] if result else None
 
     def submitHighScore(self, username, mode, score):
         if not all(isinstance(arg, (str, int)) for arg in (username, mode, score)):
