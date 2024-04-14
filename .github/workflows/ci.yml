@@ -31,7 +31,9 @@ jobs:
           IMAGE_TAG: latest-${GITHUB_SHA::8}
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/game-ws:${{ env.IMAGE_TAG }} .
-          docker images 
+          docker images
+          sed -i "s/tag: .*/tag: $IMAGE_TAG/" ./k8s/helm/values.yaml
+          cat ./k8s/helm/values.yaml
 
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/game-ws:${{ env.IMAGE_TAG }}
