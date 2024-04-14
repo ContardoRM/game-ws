@@ -55,10 +55,11 @@ jobs:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
           version: '1.21.0'
 
-#      - name: Run kubectl apply
-#        run: |
-#          kubectl apply -f k8s/
-#          kubectl get po
+      - name: Run kubectl apply
+        if: false
+        run: |
+          kubectl apply -f k8s/
+          kubectl get po
 
       - name: Download Helm script
         run: curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
