@@ -32,9 +32,10 @@ Se levanta el proyecto con el siguiente Docker file en donde tenemos la capacida
 
 ## Manifiestos Kubernetes (k8s)
 
-Se crean los siguiente manifiestos, en donde el deployment usa como imagen la imagen alojada en dockerhub contardorm/desafio-ws:latest
+Se crean los siguiente manifiestos, en donde el deployment usa la imagen contardorm/desafio-ws:latest almacenada en dockerhub
 
 - deployment.yaml
+
 ```bash
       apiVersion: apps/v1
       kind: Deployment
@@ -62,6 +63,7 @@ Se crean los siguiente manifiestos, en donde el deployment usa como imagen la im
               - containerPort: 8080
 ```
 - service.yaml
+
 ```bash
         apiVersion: v1
         kind: Service
@@ -77,7 +79,8 @@ Se crean los siguiente manifiestos, en donde el deployment usa como imagen la im
           type: NodePort
 ```
 ## Helm chart 
-Se crear un chart asociado al servicio  en donde tenemos la capacidad de cambiar parametros asociados al contenedor puertos e ip del servicio
+Se crea un chart asociado al servicio  en donde tenemos la capacidad de cambiar varios parametros  asociados al servicio como los indicados a continuación
+
 - values.yaml
 ```bash
 image:
@@ -94,26 +97,27 @@ replicaCount: 1
 flaskHost: 0.0.0.0
 flaskPort: 8080
 ```
+
 - Chart.yaml
 En el archivo chart.yaml podemos cambiar la versión del servicio para que sea desplegado sobre el cluster de esta forma cada vez que realicemos un cambio a nivel de código podemos desencadenar que se actualice el servicio a nivel de helm.
+
 ```bash
 version: 0.1.11
 ```
 
-## Despliegue sobre k8s
-
-Se prueban desplegando de forma independiente los archivos deployment y service, luego mediante Helm directamente por consola.
-
 ## Acceso a la Aplicación desde el Cluster
-Se usa la el servicio de port-formard para consumir el servicio en la red local del namespace
+Se usa el servicio de port-formard para probar el juego desde la red local de kubernetes
+
 ```bash
 kubectl port-forward service/game-ws-flask 8080:80
 ```
+
 ![port-forward](./images/port-forward.png)
-![local](localhost.png)
+![local](./images/localhost.png)
 
 ## CICD 
-Se realiza la integración con github action para habilitar tanto la compilación, analisis estatico como Despliegue.
+Se realiza la integración con github action para habilitar tanto la compilación y despliegue de la imagen del contenedor, analisis estatico y Despliegue.
+
 ![githubactions](./images/githubactions.png)
 
 ## Integración con Sonarcloud
@@ -123,7 +127,9 @@ Se agrega la integración con sonarcloud para una analisis de codigo estatico de
 ![sonar2](./images/sonar2.png)
 
 ## Deploy del servicio
+
 Se habilita la integración para un deploy mediante kubectl y helm
+
 ```bash
       - name: Run kubectl apply
         run: |
@@ -136,8 +142,10 @@ Se habilita la integración para un deploy mediante kubectl y helm
           helm upgrade game-ws ./k8s/helm/
 ```
 
+![Helm Deploy](./images/helmdeploy.png)
+
 ## Integración con Slack
-Se habilita la integración con slack para realizar notificaciones en caso de exito o fracaso al momento de ejecutar la CI en github action
+Se habilita la integración con slack para realizar notificaciones en caso de exito o fracaso al momento de ejecutar la CI en github actions
 
 ![slack notificacion](./images/slack%20notificacion.png)
 ![slack notificacion](./images/slack2.png)
@@ -154,7 +162,7 @@ docker build --no-cache -t imagendesafiows .
 ```bash
 docker run --name desafiows --rm -p 8080:8080 imagendesafiows
 ```
-5. Luego vamos a un navedador y vamosa localhost:8080
+5. Luego vamos a un navedador en donde desplegamos localhost:8080
 ![localhost](./images/localhost.png)
 
 ## Fuera de scope
