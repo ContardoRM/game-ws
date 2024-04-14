@@ -90,7 +90,7 @@ jobs:
         env:
           SLACK_CHANNEL: desafiowhitestack
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_ICON: https://avatars.githubusercontent.com/u/9919?s=48&v=4
           SLACK_MESSAGE: 'Deploy correcto :rocket:'
           SLACK_TITLE: Deploy Desafio whitestack
           SLACK_USERNAME: DevOps
@@ -102,7 +102,7 @@ jobs:
         env:
           SLACK_CHANNEL: desafiowhitestack
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_ICON: https://avatars.githubusercontent.com/u/9919?s=48&v=4
           SLACK_MESSAGE: 'Deploy con error :rocket:'
           SLACK_TITLE: Deploy Desafio whitestack
           SLACK_USERNAME: DevOps
