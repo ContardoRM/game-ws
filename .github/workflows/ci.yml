@@ -89,7 +89,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2.3.0
         with:
           slack_webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          channel: general
+          channel: desafiowhitestack
           message: |
             El flujo de trabajo de GitHub se ejecutó con éxito en la rama ${{ env.BRANCH }}.
             Más detalles en el [enlace](https://github.com/usuario/repositorio/actions/runs/${{ github.run_id }}).
@@ -102,7 +102,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2.3.0
         with:
           slack_webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          channel: general
+          channel: desafiowhitestack
           message: |
             El flujo de trabajo de GitHub ha fallado en la rama ${{ env.BRANCH }}.
             Más detalles en el [enlace](https://github.com/usuario/repositorio/actions/runs/${{ github.run_id }}).
