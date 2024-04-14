@@ -23,12 +23,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
+        env:
+          IMAGE_TAG: latest-${GITHUB_SHA::8}
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/game-ws:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/game-ws:${IMAGE_TAG} .
           docker images 
 
       - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/game-ws:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/game-ws:${IMAGE_TAG}
 
       - name: Run SonarCloud Analysis
         env:
