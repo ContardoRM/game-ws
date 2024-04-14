@@ -86,7 +86,7 @@ jobs:
 
       - name: Notify Slack on success
         if: success()
-        uses: rtCamp/action-slack-notify@v3
+        uses: rtCamp/action-slack-notify@v2.3.0
         with:
           slack_webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           channel: general
@@ -99,7 +99,7 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: rtCamp/action-slack-notify@v3
+        uses: rtCamp/action-slack-notify@v2.3.0
         with:
           slack_webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           channel: general
