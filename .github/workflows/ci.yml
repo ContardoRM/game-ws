@@ -84,28 +84,26 @@ jobs:
         id: branch
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
-      - name: Notify Slack on success
+      - name: Slack Notification  on success
         if: success()
-        uses: rtCamp/action-slack-notify@v2.3.0
-        with:
-          slack_webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          channel: desafiowhitestack
-          message: |
-            El flujo de trabajo de GitHub se ejecutó con éxito en la rama ${{ env.BRANCH }}.
-            Más detalles en el [enlace](https://github.com/usuario/repositorio/actions/runs/${{ github.run_id }}).
-          status: "success"
-          author_name: "GitHub Actions"
-          author_icon: "https://github.githubassets.com/favicon.ico"
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_TITLE: Post Title
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-      - name: Notify Slack on failure
+      - name: Slack Notification on failure
         if: failure()
-        uses: rtCamp/action-slack-notify@v2.3.0
-        with:
-          slack_webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          channel: desafiowhitestack
-          message: |
-            El flujo de trabajo de GitHub ha fallado en la rama ${{ env.BRANCH }}.
-            Más detalles en el [enlace](https://github.com/usuario/repositorio/actions/runs/${{ github.run_id }}).
-          status: "failure"
-          author_name: "GitHub Actions"
-          author_icon: "https://github.githubassets.com/favicon.ico"
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_TITLE: Post Title
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
