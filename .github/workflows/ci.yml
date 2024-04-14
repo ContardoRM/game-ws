@@ -82,7 +82,7 @@ jobs:
 
       - name: Get branch name
         id: branch
-        run: echo "Branch: $GITHUB_REF" >> $GITHUB_ENV
+        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Notify Slack on success
         if: success()
