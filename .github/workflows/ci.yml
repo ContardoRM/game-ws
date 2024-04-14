@@ -74,7 +74,6 @@ jobs:
           helm version
           helm repo add stable https://charts.helm.sh/stable
           helm repo update
-          helm package ./k8s/helm
-          helm install game-ws ./k8s/helm/game-ws-$NEW_VERSION.tgz
+          helm upgrade game-ws ./k8s/helm/
           kubectl get po
           helm ls
