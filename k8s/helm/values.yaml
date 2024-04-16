@@ -13,3 +13,6 @@ replicaCount: 1
 
 flaskHost: 0.0.0.0
 flaskPort: 8080
+
+ingress:
+  host: challengews.com
